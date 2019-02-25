@@ -1,12 +1,15 @@
 package com.eastwood.pattern.viewstate;
 
+import android.arch.lifecycle.LifecycleObserver;
+import android.arch.lifecycle.ViewModel;
+
 import java.lang.reflect.Constructor;
 
 /**
  * @author eastwood
  * createDate: 2019-02-20
  */
-public class ViewState<VD extends ViewState.ViewData, VE extends ViewState.ViewEvent> {
+public class ViewState<VD extends ViewState.ViewData, VE extends ViewState.ViewEvent> extends ViewModel implements LifecycleObserver {
 
     public VD viewData;
 
@@ -27,9 +30,21 @@ public class ViewState<VD extends ViewState.ViewData, VE extends ViewState.ViewE
     }
 
     public class ViewData {
+
     }
 
     public class ViewEvent {
+
+    }
+
+    public IViewController mViewController;
+
+    public void setViewController(IViewController viewController) {
+        this.mViewController = viewController;
+    }
+
+    public IViewController getViewController() {
+        return this.mViewController;
     }
 
 }

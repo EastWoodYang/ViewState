@@ -12,7 +12,7 @@ import android.support.v4.app.Fragment;
  */
 public class ViewFragment<VS extends ViewState, VC extends ViewController<VS>> extends Fragment {
 
-    private VC mViewController;
+    private VS mViewState;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,15 +21,25 @@ public class ViewFragment<VS extends ViewState, VC extends ViewController<VS>> e
     }
 
     protected void initViewController(Bundle savedInstanceState) {
-        Class<? extends ViewModel> vcClass = ViewUtil.getTypeClass(this, 1);
-        mViewController = (VC) ViewModelProviders.of(this).get(vcClass);
-        mViewController.setLifecycleOwner(this);
-        getLifecycle().addObserver(mViewController);
-        mViewController.onCreate(savedInstanceState);
+        Class<? extends ViewModel> vsClass = ViewUtil.getTypeClass(this, 0);
+        mViewState = (VS) ViewModelProviders.of(this).get(vsClass);
+        getLifecycle().addObserver(mViewState);
+
+        if (mViewState.getViewController() == null) {
+            Class<VC> vcClass = ViewUtil.getTypeClass(this, 1);
+            IViewController<VS> viewController = null;
+            try {
+                viewController = vcClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mViewState.setViewController(viewController);
+        }
+        mViewState.getViewController().onCreate(savedInstanceState);
     }
 
     public VS getViewState() {
-        return mViewController.getViewState();
+        return mViewState;
     }
 
 }
