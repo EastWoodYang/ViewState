@@ -6,9 +6,10 @@ import android.arch.lifecycle.OnLifecycleEvent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.eastwood.pattern.viewstate.ViewController;
+import com.eastwood.pattern.viewextra.ViewExtrasController;
+import com.eastwood.pattern.viewextra.viewstate.NetErrorViewState;
 
-public class SimpleController extends ViewController<SimpleState> {
+public class SimpleController extends ViewExtrasController<SimpleViewState> {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,21 +24,34 @@ public class SimpleController extends ViewController<SimpleState> {
             }
         });
 
+        NetErrorViewState netErrorViewState = getViewState().getNetErrorViewState();
+        netErrorViewState.netErrorRetryClickEvent.observe(getLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                // TODO
+            }
+        });
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    public void onStart() {}
+    public void onStart() {
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    public void onResume() {}
+    public void onResume() {
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    public void onPause() {}
+    public void onPause() {
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    public void onStop() {}
+    public void onStop() {
+    }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    public void onDestroy() {}
+    public void onDestroy() {
+    }
 
 }

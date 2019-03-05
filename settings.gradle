@@ -1,1 +1,1 @@
-include ':app', ':viewstate'
+include ':app', ':viewstate', ':viewextra'

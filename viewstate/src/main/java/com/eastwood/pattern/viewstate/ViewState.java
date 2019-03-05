@@ -37,9 +37,9 @@ public class ViewState<VD extends ViewState.ViewData, VE extends ViewState.ViewE
 
     }
 
-    public IViewController mViewController;
+    private IViewController mViewController;
 
-    public void setViewController(IViewController viewController) {
+    void setViewController(IViewController viewController) {
         this.mViewController = viewController;
     }
 

@@ -2,19 +2,19 @@ package com.eastwood.demo.app;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.eastwood.pattern.viewextra.ViewExtrasState;
 import com.eastwood.pattern.viewstate.SingleLiveEvent;
-import com.eastwood.pattern.viewstate.ViewState;
 
 
-public class SimpleState extends ViewState<SimpleState.LoginViewData, SimpleState.LoginViewEvent> {
+public class SimpleViewState extends ViewExtrasState<SimpleViewState.ViewData, SimpleViewState.ViewEvent> {
 
-    public class LoginViewData extends ViewState.ViewData {
+    public class ViewData extends ViewExtrasState.ViewData {
 
         public MutableLiveData<Integer> contentState = new MutableLiveData<>();
 
     }
 
-    public class LoginViewEvent extends ViewState.ViewEvent {
+    public class ViewEvent extends ViewExtrasState.ViewEvent {
 
         public SingleLiveEvent<Boolean> buttonClickEvent = new SingleLiveEvent<>();
 

@@ -31,7 +31,7 @@ public class ViewFragment<VS extends ViewState, VC extends ViewController<VS>> e
             try {
                 viewController = vcClass.newInstance();
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
             mViewState.setViewController(viewController);
         }

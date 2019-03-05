@@ -33,7 +33,7 @@ public class ViewActivity<VS extends ViewState, VC extends ViewController<VS>> e
                 viewController.setLifecycleOwner(this);
                 viewController.setViewState(mViewState);
             } catch (Exception e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
             mViewState.setViewController(viewController);
         }
@@ -43,4 +43,5 @@ public class ViewActivity<VS extends ViewState, VC extends ViewController<VS>> e
     public VS getViewState() {
         return mViewState;
     }
+
 }
