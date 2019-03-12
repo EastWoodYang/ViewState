@@ -20,6 +20,16 @@ class TitleBarImpl implements ViewExtra<TitleBarViewState> {
     }
 
     @Override
+    public void createViewExtra() {
+
+    }
+
+    @Override
+    public boolean isViewExtraCreated() {
+        return false;
+    }
+
+    @Override
     public TitleBarViewState getViewState() {
         return viewState;
     }

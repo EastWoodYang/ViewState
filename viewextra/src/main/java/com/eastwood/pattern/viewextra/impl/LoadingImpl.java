@@ -20,6 +20,16 @@ class LoadingImpl implements ViewExtra<LoadingViewState> {
     }
 
     @Override
+    public void createViewExtra() {
+
+    }
+
+    @Override
+    public boolean isViewExtraCreated() {
+        return false;
+    }
+
+    @Override
     public LoadingViewState getViewState() {
         return viewState;
     }

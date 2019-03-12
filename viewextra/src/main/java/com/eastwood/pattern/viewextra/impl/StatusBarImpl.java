@@ -17,6 +17,16 @@ class StatusBarImpl implements ViewExtra<StatusBarViewState> {
     }
 
     @Override
+    public void createViewExtra() {
+
+    }
+
+    @Override
+    public boolean isViewExtraCreated() {
+        return false;
+    }
+
+    @Override
     public StatusBarViewState getViewState() {
         return viewState;
     }

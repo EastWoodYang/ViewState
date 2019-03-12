@@ -17,6 +17,16 @@ class ToastImpl implements ViewExtra<ToastViewState> {
     }
 
     @Override
+    public void createViewExtra() {
+
+    }
+
+    @Override
+    public boolean isViewExtraCreated() {
+        return false;
+    }
+
+    @Override
     public ToastViewState getViewState() {
         return viewState;
     }

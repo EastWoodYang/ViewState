@@ -20,6 +20,16 @@ class DataEmptyImpl implements ViewExtra<DataEmptyViewState> {
     }
 
     @Override
+    public void createViewExtra() {
+
+    }
+
+    @Override
+    public boolean isViewExtraCreated() {
+        return false;
+    }
+
+    @Override
     public DataEmptyViewState getViewState() {
         return viewState;
     }

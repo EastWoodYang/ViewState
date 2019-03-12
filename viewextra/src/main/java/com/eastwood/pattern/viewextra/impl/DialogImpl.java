@@ -17,6 +17,16 @@ class DialogImpl implements ViewExtra<DialogViewState> {
     }
 
     @Override
+    public void createViewExtra() {
+
+    }
+
+    @Override
+    public boolean isViewExtraCreated() {
+        return false;
+    }
+
+    @Override
     public DialogViewState getViewState() {
         return viewState;
     }

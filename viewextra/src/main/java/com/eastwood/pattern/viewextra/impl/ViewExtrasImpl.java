@@ -15,7 +15,6 @@ import com.eastwood.pattern.viewextra.viewstate.StatusBarViewState;
 import com.eastwood.pattern.viewextra.viewstate.TitleBarViewState;
 import com.eastwood.pattern.viewextra.viewstate.ToastViewState;
 
-// TODO
 public class ViewExtrasImpl implements ViewExtras {
 
     private ViewExtra<DataEmptyViewState> dataEmpty;

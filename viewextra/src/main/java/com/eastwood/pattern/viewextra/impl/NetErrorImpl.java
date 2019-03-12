@@ -14,50 +14,58 @@ import com.eastwood.pattern.viewextra.viewstate.NetErrorViewState;
 // TODO
 class NetErrorImpl implements ViewExtra<NetErrorViewState> {
 
+    private Context mContext;
+    private LifecycleOwner mLifecycleOwner;
     private ViewGroup mContainer;
-    private NetErrorViewState viewState;
+    private NetErrorViewState mNetErrorViewState;
 
     private DefaultPageLayout defaultPageLayout;
 
     NetErrorImpl(Context context, LifecycleOwner lifecycleOwner, NetErrorViewState netErrorViewState, final ViewGroup container) {
+        this.mContext = context;
+        this.mLifecycleOwner = lifecycleOwner;
         this.mContainer = container;
-        viewState = netErrorViewState;
+        this.mNetErrorViewState = netErrorViewState;
+    }
 
-        defaultPageLayout = new DefaultPageLayout(context);
+    @Override
+    public void createViewExtra() {
+        mContainer.addView(defaultPageLayout);
         // set default style...
 
         defaultPageLayout.setOnActionButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewState.netErrorRetryClickEvent.setValue(true);
+                mNetErrorViewState.netErrorRetryClickEvent.setValue(true);
             }
         });
 
-        viewState.tipState.observe(lifecycleOwner, new Observer<String>() {
+        mNetErrorViewState.tipState.observe(mLifecycleOwner, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 defaultPageLayout.setTip(s);
             }
         });
-        viewState.pictureResourceState.observe(lifecycleOwner, new Observer<Integer>() {
+        mNetErrorViewState.pictureResourceState.observe(mLifecycleOwner, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
                 defaultPageLayout.setPictureResource(i);
             }
         });
-        viewState.actionButtonTextState.observe(lifecycleOwner, new Observer<String>() {
+        mNetErrorViewState.actionButtonTextState.observe(mLifecycleOwner, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 defaultPageLayout.setActionButtonText(s);
             }
         });
-        viewState.actionButtonVisibleState.observe(lifecycleOwner, new Observer<Boolean>() {
+        mNetErrorViewState.actionButtonVisibleState.observe(mLifecycleOwner, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean b) {
                 defaultPageLayout.setActionButtonVisibility(b);
             }
         });
-        viewState.netErrorViewVisibleState.observe(lifecycleOwner, new Observer<Boolean>() {
+
+        mNetErrorViewState.netErrorViewVisibleState.observe(mLifecycleOwner, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (defaultPageLayout == null) return;
@@ -76,8 +84,13 @@ class NetErrorImpl implements ViewExtra<NetErrorViewState> {
     }
 
     @Override
+    public boolean isViewExtraCreated() {
+        return defaultPageLayout != null;
+    }
+
+    @Override
     public NetErrorViewState getViewState() {
-        return viewState;
+        return mNetErrorViewState;
     }
 
 }

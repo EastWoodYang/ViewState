@@ -17,17 +17,17 @@ public class ViewActivity<VS extends ViewState, VC extends ViewController<VS>> e
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initViewController(savedInstanceState);
+        initViewState(savedInstanceState);
     }
 
-    protected void initViewController(Bundle savedInstanceState) {
+    protected void initViewState(Bundle savedInstanceState) {
         Class<? extends ViewModel> vsClass = ViewUtil.getTypeClass(this, 0);
         mViewState = (VS) ViewModelProviders.of(this).get(vsClass);
         getLifecycle().addObserver(mViewState);
 
-        if (mViewState.getViewController() == null) {
+        IViewController<VS> viewController = mViewState.getViewController();
+        if (viewController == null) {
             Class<VC> vcClass = ViewUtil.getTypeClass(this, 1);
-            IViewController<VS> viewController = null;
             try {
                 viewController = vcClass.newInstance();
                 viewController.setLifecycleOwner(this);
@@ -37,7 +37,7 @@ public class ViewActivity<VS extends ViewState, VC extends ViewController<VS>> e
             }
             mViewState.setViewController(viewController);
         }
-        mViewState.getViewController().onCreate(savedInstanceState);
+        viewController.onCreate(savedInstanceState);
     }
 
     public VS getViewState() {
