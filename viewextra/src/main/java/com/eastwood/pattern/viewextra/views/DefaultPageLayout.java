@@ -31,6 +31,7 @@ public class DefaultPageLayout extends LinearLayout {
     private void init(final Context context) {
         setOrientation(VERTICAL);
         setGravity(Gravity.CENTER);
+        setClickable(true);
         LayoutInflater.from(context).inflate(R.layout.layout_default_page, this, true);
         mActionButton = findViewById(R.id.btn_action);
         mPictureImageView = findViewById(R.id.iv_default_page_picture);

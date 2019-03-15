@@ -19,4 +19,6 @@ public interface IViewController<VS> {
 
     void onCreate(Bundle savedInstanceState);
 
+    void onViewCreated(Bundle savedInstanceState);
+
 }

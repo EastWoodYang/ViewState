@@ -2,7 +2,7 @@ package com.eastwood.pattern.viewextra;
 
 import android.view.ViewGroup;
 
-public interface ViewExtraContainers {
+public interface ViewExtrasContainers {
 
     ViewGroup getDataEmptyContainer();
 

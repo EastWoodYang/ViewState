@@ -4,9 +4,9 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
 
 import com.eastwood.pattern.viewextra.ViewExtra;
-import com.eastwood.pattern.viewextra.ViewExtraContainers;
-import com.eastwood.pattern.viewextra.ViewExtras;
-import com.eastwood.pattern.viewextra.ViewExtrasViewStates;
+import com.eastwood.pattern.viewextra.ViewExtrasContainers;
+import com.eastwood.pattern.viewextra.IViewExtras;
+import com.eastwood.pattern.viewextra.IViewExtrasViewStates;
 import com.eastwood.pattern.viewextra.viewstate.DataEmptyViewState;
 import com.eastwood.pattern.viewextra.viewstate.DialogViewState;
 import com.eastwood.pattern.viewextra.viewstate.LoadingViewState;
@@ -15,7 +15,7 @@ import com.eastwood.pattern.viewextra.viewstate.StatusBarViewState;
 import com.eastwood.pattern.viewextra.viewstate.TitleBarViewState;
 import com.eastwood.pattern.viewextra.viewstate.ToastViewState;
 
-public class ViewExtrasImpl implements ViewExtras {
+public class ViewExtrasImpl implements IViewExtras {
 
     private ViewExtra<DataEmptyViewState> dataEmpty;
     private ViewExtra<DialogViewState> dialog;
@@ -27,20 +27,20 @@ public class ViewExtrasImpl implements ViewExtras {
 
     private Context context;
     private LifecycleOwner lifecycleOwner;
-    private ViewExtrasViewStates viewExtrasViewStates;
-    private ViewExtraContainers viewExtraContainers;
+    private IViewExtrasViewStates IViewExtrasViewStates;
+    private ViewExtrasContainers viewExtrasContainers;
 
-    public ViewExtrasImpl(Context context, LifecycleOwner lifecycleOwner, ViewExtrasViewStates viewExtrasViewStates, ViewExtraContainers viewExtraContainers) {
+    public ViewExtrasImpl(Context context, LifecycleOwner lifecycleOwner, IViewExtrasViewStates IViewExtrasViewStates, ViewExtrasContainers viewExtrasContainers) {
         this.context = context;
         this.lifecycleOwner = lifecycleOwner;
-        this.viewExtrasViewStates = viewExtrasViewStates;
-        this.viewExtraContainers = viewExtraContainers;
+        this.IViewExtrasViewStates = IViewExtrasViewStates;
+        this.viewExtrasContainers = viewExtrasContainers;
     }
 
     @Override
     public ViewExtra<DataEmptyViewState> getDataEmpty() {
         if (dataEmpty == null) {
-            dataEmpty = new DataEmptyImpl(context, lifecycleOwner, viewExtrasViewStates.getDataEmptyViewState(), viewExtraContainers.getDataEmptyContainer());
+            dataEmpty = new DataEmptyImpl(context, lifecycleOwner, IViewExtrasViewStates.getDataEmptyViewState(), viewExtrasContainers.getDataEmptyContainer());
         }
         return dataEmpty;
     }
@@ -48,7 +48,7 @@ public class ViewExtrasImpl implements ViewExtras {
     @Override
     public ViewExtra<DialogViewState> getDialog() {
         if (dialog == null) {
-            dialog = new DialogImpl(context, lifecycleOwner, viewExtrasViewStates.getDialogViewState());
+            dialog = new DialogImpl(context, lifecycleOwner, IViewExtrasViewStates.getDialogViewState());
         }
         return dialog;
     }
@@ -56,7 +56,7 @@ public class ViewExtrasImpl implements ViewExtras {
     @Override
     public ViewExtra<LoadingViewState> getLoading() {
         if (loading == null) {
-            loading = new LoadingImpl(context, lifecycleOwner, viewExtrasViewStates.getLoadingViewState(), viewExtraContainers.getLoadingContainer());
+            loading = new LoadingImpl(context, lifecycleOwner, IViewExtrasViewStates.getLoadingViewState(), viewExtrasContainers.getLoadingContainer());
         }
         return loading;
     }
@@ -64,7 +64,7 @@ public class ViewExtrasImpl implements ViewExtras {
     @Override
     public ViewExtra<NetErrorViewState> getNetError() {
         if (netError == null) {
-            netError = new NetErrorImpl(context, lifecycleOwner, viewExtrasViewStates.getNetErrorViewState(), viewExtraContainers.getNetErrorContainer());
+            netError = new NetErrorImpl(context, lifecycleOwner, IViewExtrasViewStates.getNetErrorViewState(), viewExtrasContainers.getNetErrorContainer());
         }
         return netError;
     }
@@ -72,7 +72,7 @@ public class ViewExtrasImpl implements ViewExtras {
     @Override
     public ViewExtra<StatusBarViewState> getStatusBar() {
         if (statusBar == null) {
-            statusBar = new StatusBarImpl(context, lifecycleOwner, viewExtrasViewStates.getStatusBarViewState());
+            statusBar = new StatusBarImpl(context, lifecycleOwner, IViewExtrasViewStates.getStatusBarViewState());
         }
         return statusBar;
     }
@@ -80,7 +80,7 @@ public class ViewExtrasImpl implements ViewExtras {
     @Override
     public ViewExtra<TitleBarViewState> getTitleBar() {
         if (titleBar == null) {
-            titleBar = new TitleBarImpl(context, lifecycleOwner, viewExtrasViewStates.getTitleBarViewState(), viewExtraContainers.getTitleBarContainer());
+            titleBar = new TitleBarImpl(context, lifecycleOwner, IViewExtrasViewStates.getTitleBarViewState(), viewExtrasContainers.getTitleBarContainer());
         }
         return titleBar;
     }
@@ -88,7 +88,7 @@ public class ViewExtrasImpl implements ViewExtras {
     @Override
     public ViewExtra<ToastViewState> getToast() {
         if (toast == null) {
-            toast = new ToastImpl(context, lifecycleOwner, viewExtrasViewStates.getToastViewState());
+            toast = new ToastImpl(context, lifecycleOwner, IViewExtrasViewStates.getToastViewState());
         }
         return toast;
     }

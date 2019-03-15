@@ -1,6 +1,5 @@
 package com.eastwood.pattern.viewextra;
 
-
 import com.eastwood.pattern.viewextra.viewstate.DataEmptyViewState;
 import com.eastwood.pattern.viewextra.viewstate.DialogViewState;
 import com.eastwood.pattern.viewextra.viewstate.LoadingViewState;
@@ -9,20 +8,20 @@ import com.eastwood.pattern.viewextra.viewstate.StatusBarViewState;
 import com.eastwood.pattern.viewextra.viewstate.TitleBarViewState;
 import com.eastwood.pattern.viewextra.viewstate.ToastViewState;
 
-public interface ViewExtras {
+public interface IViewExtrasViewStates {
 
-    ViewExtra<DataEmptyViewState> getDataEmpty();
+    DataEmptyViewState getDataEmptyViewState();
 
-    ViewExtra<DialogViewState> getDialog();
+    DialogViewState getDialogViewState();
 
-    ViewExtra<LoadingViewState> getLoading();
+    LoadingViewState getLoadingViewState();
 
-    ViewExtra<NetErrorViewState> getNetError();
+    NetErrorViewState getNetErrorViewState();
 
-    ViewExtra<StatusBarViewState> getStatusBar();
+    StatusBarViewState getStatusBarViewState();
 
-    ViewExtra<TitleBarViewState> getTitleBar();
+    TitleBarViewState getTitleBarViewState();
 
-    ViewExtra<ToastViewState> getToast();
+    ToastViewState getToastViewState();
 
 }

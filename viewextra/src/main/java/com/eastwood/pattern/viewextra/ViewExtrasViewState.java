@@ -9,8 +9,8 @@ import com.eastwood.pattern.viewextra.viewstate.TitleBarViewState;
 import com.eastwood.pattern.viewextra.viewstate.ToastViewState;
 import com.eastwood.pattern.viewstate.ViewState;
 
-public class ViewExtrasState<VD extends ViewExtrasState.ViewData, VE extends ViewExtrasState.ViewEvent> extends ViewState<VD, VE>
-        implements ViewExtrasViewStates {
+public class ViewExtrasViewState<VD extends ViewExtrasViewState.ViewData, VE extends ViewExtrasViewState.ViewEvent> extends ViewState<VD, VE>
+        implements IViewExtrasViewStates {
 
     private DataEmptyViewState mDataEmptyViewState;
     private DialogViewState mDialogViewState;

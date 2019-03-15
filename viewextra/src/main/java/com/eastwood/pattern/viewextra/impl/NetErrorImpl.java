@@ -7,11 +7,11 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.eastwood.pattern.viewextra.R;
 import com.eastwood.pattern.viewextra.ViewExtra;
 import com.eastwood.pattern.viewextra.views.DefaultPageLayout;
 import com.eastwood.pattern.viewextra.viewstate.NetErrorViewState;
 
-// TODO
 class NetErrorImpl implements ViewExtra<NetErrorViewState> {
 
     private Context mContext;
@@ -19,7 +19,7 @@ class NetErrorImpl implements ViewExtra<NetErrorViewState> {
     private ViewGroup mContainer;
     private NetErrorViewState mNetErrorViewState;
 
-    private DefaultPageLayout defaultPageLayout;
+    private DefaultPageLayout mDefaultPageLayout;
 
     NetErrorImpl(Context context, LifecycleOwner lifecycleOwner, NetErrorViewState netErrorViewState, final ViewGroup container) {
         this.mContext = context;
@@ -30,54 +30,63 @@ class NetErrorImpl implements ViewExtra<NetErrorViewState> {
 
     @Override
     public void createViewExtra() {
-        mContainer.addView(defaultPageLayout);
-        // set default style...
-
-        defaultPageLayout.setOnActionButtonClickListener(new View.OnClickListener() {
+        mDefaultPageLayout = new DefaultPageLayout(mContext);
+        mDefaultPageLayout.setBackgroundColor(mContext.getResources().getColor(android.R.color.white));
+        mDefaultPageLayout.setPictureResource(R.drawable.ic_network_fail);
+        mDefaultPageLayout.setTip("网络加载失败，请重试");
+        mDefaultPageLayout.setActionButtonText("重新加载");
+        mDefaultPageLayout.setActionButtonVisibility(true);
+        mDefaultPageLayout.setOnActionButtonClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mDefaultPageLayout.setVisibility(View.GONE);
                 mNetErrorViewState.netErrorRetryClickEvent.setValue(true);
             }
         });
 
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mContainer.addView(mDefaultPageLayout, params);
+
+        mDefaultPageLayout.setVisibility(View.GONE);
+
         mNetErrorViewState.tipState.observe(mLifecycleOwner, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                defaultPageLayout.setTip(s);
+                mDefaultPageLayout.setTip(s);
             }
         });
         mNetErrorViewState.pictureResourceState.observe(mLifecycleOwner, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer i) {
-                defaultPageLayout.setPictureResource(i);
+                mDefaultPageLayout.setPictureResource(i);
             }
         });
         mNetErrorViewState.actionButtonTextState.observe(mLifecycleOwner, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                defaultPageLayout.setActionButtonText(s);
+                mDefaultPageLayout.setActionButtonText(s);
             }
         });
         mNetErrorViewState.actionButtonVisibleState.observe(mLifecycleOwner, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean b) {
-                defaultPageLayout.setActionButtonVisibility(b);
+                mDefaultPageLayout.setActionButtonVisibility(b);
             }
         });
 
         mNetErrorViewState.netErrorViewVisibleState.observe(mLifecycleOwner, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                if (defaultPageLayout == null) return;
+                if (mDefaultPageLayout == null) return;
 
-                if (defaultPageLayout.getParent() == null) {
-                    mContainer.addView(defaultPageLayout);
+                if (mDefaultPageLayout.getParent() == null) {
+                    mContainer.addView(mDefaultPageLayout);
                 }
 
                 if (aBoolean == null || !aBoolean) {
-                    defaultPageLayout.setVisibility(View.GONE);
+                    mDefaultPageLayout.setVisibility(View.GONE);
                 } else {
-                    defaultPageLayout.setVisibility(View.VISIBLE);
+                    mDefaultPageLayout.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -85,7 +94,7 @@ class NetErrorImpl implements ViewExtra<NetErrorViewState> {
 
     @Override
     public boolean isViewExtraCreated() {
-        return defaultPageLayout != null;
+        return mDefaultPageLayout != null;
     }
 
     @Override

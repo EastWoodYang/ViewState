@@ -7,7 +7,7 @@ import android.os.Bundle;
  * @author eastwood
  * createDate: 2019-02-20
  */
-public class ViewController<VS extends ViewState> implements IViewController<VS> {
+public abstract class ViewController<VS extends ViewState> implements IViewController<VS> {
 
     private LifecycleOwner mLifecycleOwner;
 
@@ -31,10 +31,6 @@ public class ViewController<VS extends ViewState> implements IViewController<VS>
     @Override
     public LifecycleOwner getLifecycleOwner() {
         return this.mLifecycleOwner;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
     }
 
 }

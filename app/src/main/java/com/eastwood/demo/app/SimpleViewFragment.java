@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class SimpleViewActivity extends BizViewExtrasActivity<SimpleViewViewState, SimpleController> {
+public class SimpleViewFragment extends BizViewExtrasFragment<SimpleViewViewState, SimpleController> {
 
     private TextView mAddCountContent;
 
@@ -41,12 +41,8 @@ public class SimpleViewActivity extends BizViewExtrasActivity<SimpleViewViewStat
             }
         });
 
-        contentView.findViewById(R.id.btn_open_fragment).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SimpleViewActivity.this, SimpleFragmentActivity.class));
-            }
-        });
+        contentView.findViewById(R.id.btn_open_fragment).setVisibility(View.GONE);
+
     }
 
     @Override

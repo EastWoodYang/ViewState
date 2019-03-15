@@ -5,19 +5,35 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
 
 /**
  * @author eastwood
  * createDate: 2019-02-20
  */
-public class ViewActivity<VS extends ViewState, VC extends ViewController<VS>> extends AppCompatActivity {
+public abstract class ViewActivity<VS extends ViewState, VC extends ViewController<VS>> extends AppCompatActivity {
 
     private VS mViewState;
+
+    public VS getViewState() {
+        return mViewState;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initViewState(savedInstanceState);
+
+        View contentView = getContentView();
+        setContentView(contentView);
+
+        initContentView(contentView);
+
+        observeViewState();
+
+        ViewController viewController = (ViewController) getViewState().getViewController();
+        viewController.onViewCreated(savedInstanceState);
     }
 
     protected void initViewState(Bundle savedInstanceState) {
@@ -40,8 +56,10 @@ public class ViewActivity<VS extends ViewState, VC extends ViewController<VS>> e
         viewController.onCreate(savedInstanceState);
     }
 
-    public VS getViewState() {
-        return mViewState;
-    }
+    public abstract View getContentView();
+
+    public abstract void initContentView(View contentView);
+
+    public abstract void observeViewState();
 
 }
