@@ -19,6 +19,9 @@ public class SimpleViewActivity extends BizViewExtrasActivity<SimpleViewViewStat
     @Override
     public void initContentView(View contentView) {
         super.initContentView(contentView);
+
+        getViewExtras().getTitleBar().createViewExtra();
+
         mAddCountContent = contentView.findViewById(R.id.content);
         contentView.findViewById(R.id.btn_add_count).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +83,7 @@ public class SimpleViewActivity extends BizViewExtrasActivity<SimpleViewViewStat
 
     @Override
     public ViewGroup getTitleBarContainer() {
-        return null; // TODO
+        return findViewById(R.id.title_bar_container);
     }
 
 }
