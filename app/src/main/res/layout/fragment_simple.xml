@@ -18,12 +18,11 @@
         android:layout_height="wrap_content"
         android:text="add count" />
 
-
     <Button
-        android:id="@+id/btn_open_fragment"
+        android:id="@+id/btn_finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_add_count"
-        android:text="open fragment" />
+        android:text="finish" />
 
 </RelativeLayout>

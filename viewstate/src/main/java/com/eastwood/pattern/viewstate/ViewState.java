@@ -15,19 +15,7 @@ public class ViewState<VD extends ViewState.ViewData, VE extends ViewState.ViewE
 
     public VE viewEvent;
 
-    public ViewState() {
-        try {
-            Class vmClass = ViewUtil.getTypeClass(this, 0);
-            Constructor<?>[] vmConstructors = vmClass.getDeclaredConstructors();
-            viewData = (VD) vmConstructors[0].newInstance(this);
-
-            Class veClass = ViewUtil.getTypeClass(this, 1);
-            Constructor<?>[] veConstructors = veClass.getDeclaredConstructors();
-            viewEvent = (VE) veConstructors[0].newInstance(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    private IViewController<? extends ViewState> mViewController;
 
     public class ViewData {
 
@@ -37,14 +25,26 @@ public class ViewState<VD extends ViewState.ViewData, VE extends ViewState.ViewE
 
     }
 
-    private IViewController mViewController;
+    public ViewState() {
+        try {
+            Class vmClass = ViewUtil.getTypeClass(this.getClass(), ViewData.class);
+            Constructor<?>[] vmConstructors = vmClass.getDeclaredConstructors();
+            viewData = (VD) vmConstructors[0].newInstance(this);
 
-    void setViewController(IViewController viewController) {
-        this.mViewController = viewController;
+            Class veClass = ViewUtil.getTypeClass(this.getClass(), ViewEvent.class);
+            Constructor<?>[] veConstructors = veClass.getDeclaredConstructors();
+            viewEvent = (VE) veConstructors[0].newInstance(this);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public IViewController getViewController() {
+    public IViewController<? extends ViewState> getViewController() {
         return this.mViewController;
+    }
+
+    void setViewController(IViewController<? extends ViewState> viewController) {
+        this.mViewController = viewController;
     }
 
 }
