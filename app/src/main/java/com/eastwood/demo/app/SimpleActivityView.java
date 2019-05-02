@@ -1,7 +1,6 @@
 package com.eastwood.demo.app;
 
 import android.arch.lifecycle.Observer;
-import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class SimpleActivityView extends BaseViewExtraActivity<SimpleActivityView
         contentView.findViewById(R.id.btn_open_fragment).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SimpleActivityView.this, SimpleFragmentActivity.class));
+                getViewState().viewEvent.openFragmentEvent.setValue(true);
             }
         });
     }

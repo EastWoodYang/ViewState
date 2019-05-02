@@ -9,24 +9,24 @@ import com.eastwood.pattern.viewstate.SingleLiveEvent;
 
 public class TitleBarViewState {
 
-    private MutableLiveData<String> titleBarTitleState;
+    private MutableLiveData<String> titleBarTitleData;
     private SingleLiveEvent<Boolean> titleBarArrowBackClickEvent;
     private SingleLiveEvent<Boolean> titleBarRightActionClickEvent;
 
-    public void setTitleBarTitleState(String value) {
-        if (titleBarTitleState == null) {
-            titleBarTitleState = new MutableLiveData<>();
+    public void setTitleBarTitleData(String value) {
+        if (titleBarTitleData == null) {
+            titleBarTitleData = new MutableLiveData<>();
         }
 
-        titleBarTitleState.setValue(value);
+        titleBarTitleData.setValue(value);
     }
 
-    public void observeTitleBarTitleState(@NonNull LifecycleOwner owner, @NonNull Observer<String> observer) {
-        if (titleBarTitleState == null) {
-            titleBarTitleState = new MutableLiveData<>();
+    public void observeTitleBarTitleData(@NonNull LifecycleOwner owner, @NonNull Observer<String> observer) {
+        if (titleBarTitleData == null) {
+            titleBarTitleData = new MutableLiveData<>();
         }
 
-        titleBarTitleState.observe(owner, observer);
+        titleBarTitleData.observe(owner, observer);
     }
 
     public void setTitleBarBackArrowClickEvent(Boolean value) {

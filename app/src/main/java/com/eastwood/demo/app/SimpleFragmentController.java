@@ -32,7 +32,7 @@ public class SimpleFragmentController extends BaseViewExtraController<SimpleFrag
         getViewState().viewEvent.finishEvent.observe(getLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
-                getViewExtraStates().getActivity().finish();
+                getViewExtra().getActivity().finish();
             }
         });
 

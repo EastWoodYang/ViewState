@@ -30,7 +30,7 @@ public class ActivityImpl implements ViewExtra<ActivityViewState> {
     @Override
     public void createViewExtra() {
 
-        mActivityViewState.observeStartActivityInfoState(mLifecycleOwner, new Observer<StartActivityInfo>() {
+        mActivityViewState.observeStartActivityInfoData(mLifecycleOwner, new Observer<StartActivityInfo>() {
             @Override
             public void onChanged(@Nullable StartActivityInfo startActivityInfo) {
                 if (startActivityInfo == null) {
@@ -41,7 +41,7 @@ public class ActivityImpl implements ViewExtra<ActivityViewState> {
             }
         });
 
-        mActivityViewState.observeResultCodeState(mLifecycleOwner, new Observer<Integer>() {
+        mActivityViewState.observeResultCodeData(mLifecycleOwner, new Observer<Integer>() {
             @Override
             public void onChanged(@Nullable Integer integer) {
                 if (integer != null) {
@@ -50,7 +50,7 @@ public class ActivityImpl implements ViewExtra<ActivityViewState> {
             }
         });
 
-        mActivityViewState.observeResultDataState(mLifecycleOwner, new Observer<Intent>() {
+        mActivityViewState.observeResultIntentData(mLifecycleOwner, new Observer<Intent>() {
             @Override
             public void onChanged(@Nullable Intent intent) {
                 if (intent != null) {
@@ -59,7 +59,7 @@ public class ActivityImpl implements ViewExtra<ActivityViewState> {
             }
         });
 
-        mActivityViewState.observeFinishState(mLifecycleOwner, new Observer<Boolean>() {
+        mActivityViewState.observeFinishData(mLifecycleOwner, new Observer<Boolean>() {
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 if (aBoolean != null && aBoolean) {

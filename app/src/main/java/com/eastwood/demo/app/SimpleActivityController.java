@@ -3,6 +3,7 @@ package com.eastwood.demo.app;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.OnLifecycleEvent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -26,6 +27,13 @@ public class SimpleActivityController extends BaseViewExtraController<SimpleActi
             @Override
             public void onChanged(@Nullable Boolean aBoolean) {
                 getViewState().viewData.contentData.setValue(getViewState().viewData.contentData.getValue() + 1);
+            }
+        });
+
+        getViewState().viewEvent.openFragmentEvent.observe(getLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean aBoolean) {
+                getViewExtra().getActivity().startActivity(new Intent(getContext(), SimpleFragmentActivity.class));
             }
         });
 

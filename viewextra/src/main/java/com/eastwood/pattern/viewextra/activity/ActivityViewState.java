@@ -11,25 +11,25 @@ import android.content.Intent;
  */
 public class ActivityViewState {
 
-    private MutableLiveData<StartActivityInfo> startActivityState = new MutableLiveData<>();
-    private MutableLiveData<Integer> resultCodeState = new MutableLiveData<>();
-    private MutableLiveData<Intent> resultDataState = new MutableLiveData<>();
-    private MutableLiveData<Boolean> finishState = new MutableLiveData<>();
+    private MutableLiveData<StartActivityInfo> startActivityData = new MutableLiveData<>();
+    private MutableLiveData<Integer> resultCodeData = new MutableLiveData<>();
+    private MutableLiveData<Intent> resultIntentData = new MutableLiveData<>();
+    private MutableLiveData<Boolean> finishData = new MutableLiveData<>();
 
-    void observeStartActivityInfoState(LifecycleOwner lifecycleOwner, Observer<StartActivityInfo> observer) {
-        startActivityState.observe(lifecycleOwner, observer);
+    void observeStartActivityInfoData(LifecycleOwner lifecycleOwner, Observer<StartActivityInfo> observer) {
+        startActivityData.observe(lifecycleOwner, observer);
     }
 
-    void observeResultCodeState(LifecycleOwner lifecycleOwner, Observer<Integer> observer) {
-        resultCodeState.observe(lifecycleOwner, observer);
+    void observeResultCodeData(LifecycleOwner lifecycleOwner, Observer<Integer> observer) {
+        resultCodeData.observe(lifecycleOwner, observer);
     }
 
-    void observeResultDataState(LifecycleOwner lifecycleOwner, Observer<Intent> observer) {
-        resultDataState.observe(lifecycleOwner, observer);
+    void observeResultIntentData(LifecycleOwner lifecycleOwner, Observer<Intent> observer) {
+        resultIntentData.observe(lifecycleOwner, observer);
     }
 
-    void observeFinishState(LifecycleOwner lifecycleOwner, Observer<Boolean> observer) {
-        finishState.observe(lifecycleOwner, observer);
+    void observeFinishData(LifecycleOwner lifecycleOwner, Observer<Boolean> observer) {
+        finishData.observe(lifecycleOwner, observer);
     }
 
     public void setResult(int resultCode) {
@@ -37,9 +37,9 @@ public class ActivityViewState {
     }
 
     public void setResult(int resultCode, Intent data) {
-        resultCodeState.setValue(resultCode);
+        resultCodeData.setValue(resultCode);
         if (data != null) {
-            resultDataState.setValue(data);
+            resultIntentData.setValue(data);
         }
     }
 
@@ -51,11 +51,11 @@ public class ActivityViewState {
         StartActivityInfo startActivityInfo = new StartActivityInfo();
         startActivityInfo.intent = intent;
         startActivityInfo.requestCode = requestCode;
-        startActivityState.setValue(startActivityInfo);
+        startActivityData.setValue(startActivityInfo);
     }
 
     public void finish() {
-        finishState.setValue(true);
+        finishData.setValue(true);
     }
 
 }

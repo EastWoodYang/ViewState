@@ -18,6 +18,8 @@ public class SimpleActivityViewState extends ViewExtraViewState<SimpleActivityVi
 
         public SingleLiveEvent<Boolean> addCountEvent = new SingleLiveEvent<>();
 
+        public SingleLiveEvent<Boolean> openFragmentEvent = new SingleLiveEvent<>();
+
     }
 
 }

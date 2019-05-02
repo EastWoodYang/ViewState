@@ -71,7 +71,7 @@ public class TitleBarImpl implements TitleBarViewExtra<TitleBarViewState> {
         if (!TextUtils.isEmpty(title)) {
             titleTextView.setText(title);
         }
-        mTitleBarViewState.observeTitleBarTitleState(mLifecycleOwner, new Observer<String>() {
+        mTitleBarViewState.observeTitleBarTitleData(mLifecycleOwner, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String title) {
                 if (TextUtils.isEmpty(title)) {

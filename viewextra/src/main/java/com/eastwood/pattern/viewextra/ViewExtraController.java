@@ -5,7 +5,7 @@ import com.eastwood.pattern.viewstate.ViewController;
 
 public class ViewExtraController<VS extends ViewExtraViewState> extends ViewController<VS> {
 
-    public ViewExtraStates getViewExtraStates() {
+    public ViewExtraStates getViewExtra() {
         return getViewState().getViewExtraStates();
     }
 
